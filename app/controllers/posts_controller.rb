@@ -4,12 +4,12 @@ class PostsController < ApplicationController
   end
 
   def create
-    Post.create(content: params[:content])
-    redirect_to action: :index
+    post = Post.create(content: params[:content], checked: false)
+    render json:{ post: post }
   end
 
   def checked
-    post = post.find(params[:id])
+    post = Post.find(params[:id])
     if post.checked
       post.update(checked: false)
     else
@@ -17,7 +17,7 @@ class PostsController < ApplicationController
     end
 
     item = Post.find(params[:id])
-    render json: { post: itm }
+    render json: { post: item}
   end
 end
 
